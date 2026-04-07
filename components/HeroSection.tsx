@@ -15,11 +15,11 @@ export default function HeroSection({ currentDate, theme, darkMode }: Props) {
   const weekends = countWeekends(year, month);
   const weekNum = getWeekNumber(new Date(year, month, 1));
 
-  const codeBg = darkMode ? "var(--bg)" : theme.bg;
-  const cardBg = darkMode ? "rgba(22,27,34,0.85)" : "#ffffff";
+  const codeBg = "var(--highlight)";
+  const cardBg = "var(--card)";
 
   return (
-    <div style={{ borderRadius: "var(--radius)", overflow: "hidden", boxShadow: "0 8px 40px " + theme.primary + "18", display: "flex", flexDirection: "column", background: cardBg, border: "1px solid var(--border)" }}>
+    <div style={{ borderRadius: "var(--radius)", overflow: "hidden", boxShadow: "0 8px 40px " + theme.primary + "18", display: "flex", flexDirection: "column", background: cardBg, border: "1px solid var(--border)", transition: "background 0.3s" }}>
       <div style={{ position: "relative", height: "185px", flexShrink: 0 }}>
         <img src={theme.image} alt={theme.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", filter: darkMode ? "brightness(0.55) saturate(0.8)" : "brightness(0.75)" }}
           onError={(e) => { (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&q=80"; }} />
@@ -38,15 +38,15 @@ export default function HeroSection({ currentDate, theme, darkMode }: Props) {
       <div style={{ height: "2px", background: theme.gradient, opacity: 0.8 }} />
 
       <div style={{ padding: "16px", display: "flex", flexDirection: "column", gap: "14px" }}>
-        <div style={{ fontFamily: "var(--mono)", fontSize: "0.72rem", color: "#98c379", lineHeight: "1.6", padding: "10px 12px", background: "rgba(152,195,121,0.06)", borderRadius: "6px", border: "1px solid rgba(152,195,121,0.12)" }}>
-          <span style={{ color: "var(--text-muted)" }}>// </span>{theme.quote}
+        <div style={{ fontFamily: "var(--mono)", fontSize: "0.72rem", color: "var(--text-muted)", lineHeight: "1.6", padding: "10px 12px", background: "var(--highlight)", borderRadius: "6px", border: "1px solid var(--border)" }}>
+          <span style={{ color: theme.primary }}>// </span>{theme.quote}
         </div>
 
-        <div style={{ fontFamily: "var(--mono)", fontSize: "0.7rem", background: codeBg, borderRadius: "8px", padding: "12px", border: "1px solid var(--border)", display: "flex", flexDirection: "column", gap: "5px" }}>
+        <div className="code-block" style={{ fontFamily: "var(--mono)", fontSize: "0.7rem", borderRadius: "8px", padding: "12px", display: "flex", flexDirection: "column", gap: "5px" }}>
           <div style={{ color: "var(--text-muted)", marginBottom: "4px", fontSize: "0.62rem" }}>const stats = {"{"}</div>
-          <div style={{ display: "flex", gap: "4px" }}><span style={{ color: "#abb2bf" }}>  days:</span><span style={{ color: theme.primary }}>{daysInMonth}</span><span style={{ color: "var(--text-muted)" }}>,</span></div>
-          <div style={{ display: "flex", gap: "4px" }}><span style={{ color: "#abb2bf" }}>  weekends:</span><span style={{ color: "#e5c07b" }}>{weekends}</span><span style={{ color: "var(--text-muted)" }}>,</span></div>
-          <div style={{ display: "flex", gap: "4px" }}><span style={{ color: "#abb2bf" }}>  week:</span><span style={{ color: "#c678dd" }}>{weekNum}</span><span style={{ color: "var(--text-muted)" }}>,</span></div>
+          <div style={{ display: "flex", gap: "4px" }}><span style={{ color: "var(--text-muted)" }}>  days:</span><span style={{ color: theme.primary }}>{daysInMonth}</span><span style={{ color: "var(--text-muted)" }}>,</span></div>
+          <div style={{ display: "flex", gap: "4px" }}><span style={{ color: "var(--text-muted)" }}>  weekends:</span><span style={{ color: theme.primary }}>{weekends}</span><span style={{ color: "var(--text-muted)" }}>,</span></div>
+          <div style={{ display: "flex", gap: "4px" }}><span style={{ color: "var(--text-muted)" }}>  week:</span><span style={{ color: theme.primary }}>{weekNum}</span><span style={{ color: "var(--text-muted)" }}>,</span></div>
           <div style={{ color: "var(--text-muted)" }}>{"}"}</div>
         </div>
 

@@ -1,21 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
+/* Light mode defaults */
 :root {
-  --bg: #ffffff;
+  --bg: #f8f9fa;
   --card: #ffffff;
   --accent: #61afef;
   --accent2: #528bff;
-  --text-primary: #1a1a2e;
+  --text-primary: #111827;
   --text-muted: #6b7280;
   --border: #e5e7eb;
   --highlight: #f3f4f6;
   --range-bg: #e0e7ff;
   --gradient: linear-gradient(135deg, #61afef 0%, #528bff 100%);
-  --shadow: 0 2px 20px rgba(0,0,0,0.08);
-  --shadow-md: 0 8px 40px rgba(0,0,0,0.12);
+  --shadow: 0 1px 12px rgba(0,0,0,0.08), 0 4px 24px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 32px rgba(0,0,0,0.1);
   --radius: 12px;
   --mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* Dark mode overrides — applied when data-dark="true" is on <html> */
+html[data-dark="true"] {
+  --bg: #0d1117;
+  --card: #161b22;
+  --text-primary: #c9d1d9;
+  --text-muted: #484f58;
+  --border: #21262d;
+  --shadow: 0 2px 20px rgba(0,0,0,0.4);
+  --shadow-md: 0 8px 40px rgba(0,0,0,0.6);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -25,7 +37,7 @@ body {
   color: var(--text-primary);
   font-family: 'Inter', -apple-system, sans-serif;
   min-height: 100vh;
-  transition: background 0.4s, color 0.4s;
+  transition: background 0.3s, color 0.3s;
   position: relative;
 }
 
@@ -39,10 +51,9 @@ body::before {
   opacity: 0.04;
   pointer-events: none;
   z-index: 0;
-  transition: opacity 0.4s;
 }
 
-[data-dark="true"] body::before {
+html[data-dark="true"] body::before {
   opacity: 0.07;
 }
 
@@ -54,14 +65,16 @@ main { position: relative; z-index: 1; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
+/* Cards */
 .glass-card {
   background: var(--card);
   border: 1px solid var(--border);
-  transition: background 0.3s, border-color 0.3s;
+  box-shadow: var(--shadow);
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
 
-[data-dark="true"] .glass-card {
-  background: rgba(22, 27, 34, 0.85);
+html[data-dark="true"] .glass-card {
+  background: rgba(22, 27, 34, 0.9);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -121,11 +134,6 @@ button:focus-visible {
   50%       { opacity: 0; }
 }
 
-@keyframes typeIn {
-  from { width: 0; }
-  to   { width: 100%; }
-}
-
 .fade-up     { animation: fadeUp 0.4s cubic-bezier(0.16,1,0.3,1) forwards; }
 .scale-in    { animation: scaleIn 0.22s ease forwards; }
 .saved-toast { animation: savedPop 2.2s ease forwards; }
@@ -146,15 +154,18 @@ button:focus-visible {
   margin-left: 1px;
 }
 
-/* Terminal-style line numbers */
-.line-num {
-  font-family: var(--mono);
-  font-size: 0.65rem;
-  color: var(--text-muted);
-  user-select: none;
-  min-width: 20px;
-  text-align: right;
-  padding-right: 8px;
-  border-right: 1px solid var(--border);
-  margin-right: 10px;
+/* Mac dots visible in both modes */
+.mac-dot-red   { background: #ff5f57; }
+.mac-dot-yellow { background: #febc2e; }
+.mac-dot-green  { background: #28c840; }
+
+/* Light mode: code blocks get a light gray bg */
+.code-block {
+  background: var(--highlight);
+  border: 1px solid var(--border);
+}
+
+html[data-dark="true"] .code-block {
+  background: #0d1117;
+  border: 1px solid var(--border);
 }
