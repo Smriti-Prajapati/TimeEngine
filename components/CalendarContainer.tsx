@@ -149,19 +149,19 @@ export default function CalendarContainer() {
             onClick={toggleDark}
             style={{
               background: "var(--card)",
-              border: "1px solid var(--border)",
+              border: "1px solid var(--accent)",
               borderRadius: "50px",
-              padding: "6px 14px",
+              padding: "6px 16px",
               cursor: "pointer",
               fontSize: "0.75rem",
-              color: "var(--text-muted)",
+              color: "var(--accent)",
               display: "flex", alignItems: "center", gap: "5px",
               transition: "all 0.2s",
               fontFamily: "inherit",
               fontWeight: "500",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.borderColor = "var(--accent)")}
-            onMouseLeave={(e) => (e.currentTarget.style.borderColor = "var(--border)")}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "var(--accent)"; e.currentTarget.style.color = "#fff"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "var(--card)"; e.currentTarget.style.color = "var(--accent)"; }}
           >
             {darkMode ? "Light" : "Dark"}
           </button>
